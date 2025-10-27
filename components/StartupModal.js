@@ -1,20 +1,21 @@
 // ============================================
 // STARTUP MODAL COMPONENT
 // ============================================
-// Shows a popup with "TRAIN HARD LEO" when the app first loads
+// Shows a popup with "TRAIN HARD [USER NAME]" when the app first loads
 // User can close it by clicking the button or clicking outside
 
 'use client'
 
-// This function receives one prop from the parent:
+// This function receives two props from the parent:
 // onClose: Function to hide the modal
-export default function StartupModal({ onClose }) {
+// userName: The user's name to display
+export default function StartupModal({ onClose, userName }) {
   
   // This is what shows on screen
   return (
     <div className="startup-modal-overlay" onClick={onClose}>
       <div className="startup-modal" onClick={(e) => e.stopPropagation()}>
-        <h1 className="startup-title">TRAIN HARD LEO</h1>
+        <h1 className="startup-title">TRAIN HARD {userName.toUpperCase()}</h1>
         <button className="startup-button" onClick={onClose}>
           Let&apos;s Go! 💪
         </button>

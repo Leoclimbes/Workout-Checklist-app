@@ -13,7 +13,8 @@ import { useState, useEffect } from 'react' // useState: store changing data, us
 import WorkoutForm from '../components/WorkoutForm' // The form to add workouts
 import WorkoutList from '../components/WorkoutList' // Displays the list of workouts
 import DayTabs from '../components/DayTabs' // Monday-Sunday tabs at the top
-import StartupModal from '../components/StartupModal' // "Train Hard Leo" popup
+import StartupModal from '../components/StartupModal' // "Train Hard [USER]" popup
+import NameInputModal from '../components/NameInputModal' // First-time name input
 import Legend from '../components/Legend' // Notes section at bottom
 import '../app/globals.css' // Load all the styling
 
@@ -38,8 +39,14 @@ export default function Home() {
   // selectedDay: Which day tab is currently active ("Monday", "Tuesday", etc.)
   const [selectedDay, setSelectedDay] = useState('') // Will be set when page loads
   
-  // showStartup: Should the "Train Hard Leo" popup show?
+  // showStartup: Should the "Train Hard [USER]" popup show?
   const [showStartup, setShowStartup] = useState(true) // Start with true (show it)
+  
+  // userName: The user's name (saved in localStorage)
+  const [userName, setUserName] = useState('') // Start with empty string
+  
+  // showNameInput: Should we show the name input modal?
+  const [showNameInput, setShowNameInput] = useState(false) // Start with false
 
   // ============================================
   // STORAGE KEYS - Names for localStorage
@@ -48,6 +55,7 @@ export default function Home() {
   // We need keys (like folder names) to organize the data
   const WORKOUTS_KEY = 'workouts' // Key for storing workout data
   const LAST_DATE_KEY = 'lastDate' // Key for storing the last date we opened the app
+  const USERNAME_KEY = 'userName' // Key for storing user's name
 
   // Days of the week array
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -57,6 +65,20 @@ export default function Home() {
   // ============================================
   // This runs once when the component first appears on screen
   useEffect(() => {
+    // Check if user has a saved name
+    if (typeof window !== 'undefined') {
+      const savedName = localStorage.getItem(USERNAME_KEY)
+      
+      if (!savedName) {
+        // No name saved - show name input modal
+        setShowNameInput(true)
+        setShowStartup(false) // Don't show startup modal yet
+      } else {
+        // Name exists - load it and show startup modal
+        setUserName(savedName)
+      }
+    }
+    
     // Get today's day name ("Monday", "Tuesday", etc.)
     const today = new Date().toLocaleDateString('en-US', { weekday: 'long' })
     
@@ -286,6 +308,23 @@ export default function Home() {
     }, 3000)
   }
 
+  // Save user's name and close name input modal
+  const handleSaveName = (name) => {
+    // Save name to localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(USERNAME_KEY, name)
+    }
+    
+    // Update state
+    setUserName(name)
+    
+    // Hide name input modal
+    setShowNameInput(false)
+    
+    // Show startup modal with their name
+    setShowStartup(true)
+  }
+  
   // Close the startup modal
   const handleCloseStartup = () => {
     setShowStartup(false)
@@ -296,8 +335,11 @@ export default function Home() {
   // ============================================
   return (
     <main className="container">
-      {/* If showStartup is true, show the modal */}
-      {showStartup && <StartupModal onClose={handleCloseStartup} />}
+      {/* If showNameInput is true, show the name input modal */}
+      {showNameInput && <NameInputModal onSave={handleSaveName} />}
+      
+      {/* If showStartup is true, show the startup modal with user's name */}
+      {showStartup && <StartupModal onClose={handleCloseStartup} userName={userName} />}
 
       {/* Header section with title */}
       <header>
