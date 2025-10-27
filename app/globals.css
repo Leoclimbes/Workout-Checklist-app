@@ -1,0 +1,492 @@
+/* ============================================
+   GLOBAL CSS FILE - ALL STYLING FOR THE APP
+   ============================================
+   This file contains ALL the CSS styles for your workout app
+   CSS controls how everything looks: colors, fonts, sizes, spacing, etc.
+*/
+
+/* ============================================
+   RESET - Remove default browser styles
+   ============================================ */
+* {
+    margin: 0;           /* Remove default spacing around all elements */
+    padding: 0;         /* Remove default internal spacing */
+    box-sizing: border-box; /* Makes sizing easier - padding included in width */
+}
+
+/* ============================================
+   BODY - Main background for entire page
+   ============================================ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font for all text */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient background */
+    min-height: 100vh; /* At least full screen height */
+    padding: 20px; /* Space around edges */
+}
+
+/* ============================================
+   CONTAINER - The white box that holds your app
+   ============================================ */
+.container {
+    max-width: 600px; /* App won't be wider than 600 pixels */
+    margin: 0 auto; /* Centers horizontally (0 = top/bottom, auto = left/right) */
+    background: white; /* White background */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    overflow: hidden; /* Hides anything that goes outside rounded corners */
+}
+
+/* ============================================
+   HEADER - Top section with title
+   ============================================ */
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    color: white; /* White text */
+    padding: 30px; /* Space inside */
+    text-align: center; /* Center the text */
+}
+
+header h1 {
+    font-size: 2.5rem; /* Large text size */
+    margin-bottom: 10px; /* Space below title */
+}
+
+.subtitle {
+    font-size: 1rem; /* Normal text size */
+    opacity: 0.9; /* Slightly transparent */
+}
+
+/* ============================================
+   FORM - Where user adds workouts
+   ============================================ */
+#workout-form {
+    padding: 30px; /* Space around form */
+    display: flex; /* Makes input and button sit side by side */
+    gap: 10px; /* Space between input and button */
+}
+
+/* ============================================
+   INPUT FIELD - Where user types workout name
+   ============================================ */
+#workout-input {
+    flex: 1; /* Takes up all available space */
+    padding: 15px; /* Space inside input */
+    border: 2px solid #e0e0e0; /* Light gray border */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 1rem; /* Text size */
+    transition: border-color 0.3s; /* Smooth color change on focus */
+}
+
+#workout-input:focus {
+    outline: none; /* Remove default blue outline */
+    border-color: #667eea; /* Purple border when typing */
+}
+
+/* ============================================
+   BUTTONS - All buttons in the app
+   ============================================ */
+button {
+    padding: 15px 30px; /* Space inside button */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 1rem; /* Text size */
+    cursor: pointer; /* Hand cursor when hovering */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transitions */
+}
+
+/* Hover effect - Button lifts up when mouse hovers */
+button:hover {
+    transform: translateY(-2px); /* Move up 2 pixels */
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); /* Purple shadow */
+}
+
+/* Active effect - Button goes down when clicked */
+button:active {
+    transform: translateY(0); /* Return to normal position */
+}
+
+/* ============================================
+   WORKOUT LIST - Container for all workouts
+   ============================================ */
+#workout-list {
+    list-style: none; /* Remove bullet points */
+    padding: 0 30px; /* Space on left and right */
+    max-height: 400px; /* Max height before scrolling */
+    overflow-y: auto; /* Add scrollbar if list is too long */
+}
+
+/* ============================================
+   WORKOUT ITEMS - Each individual workout
+   ============================================ */
+#workout-list li {
+    display: flex; /* Flexbox layout - items sit side by side */
+    align-items: center; /* Center items vertically */
+    padding: 15px; /* Space inside each item */
+    margin-bottom: 10px; /* Space between items */
+    background: #f8f9fa; /* Light gray background */
+    border-radius: 10px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth color change */
+}
+
+/* Hover effect - Background gets darker */
+#workout-list li:hover {
+    background: #e9ecef; /* Slightly darker gray */
+}
+
+/* ============================================
+   CHECKBOX - Next to each workout
+   ============================================ */
+input[type="checkbox"] {
+    width: 24px; /* Size of checkbox */
+    height: 24px; /* Size of checkbox */
+    margin-right: 15px; /* Space to the right */
+    cursor: pointer; /* Hand cursor when hovering */
+    accent-color: #667eea; /* Purple color when checked */
+}
+
+/* ============================================
+   WORKOUT TEXT - The workout name
+   ============================================ */
+.workout-text {
+    flex: 1; /* Takes up remaining space */
+    font-size: 1.1rem; /* Slightly larger text */
+    color: #333; /* Dark gray text */
+}
+
+/* ============================================
+   CHECKED STATE - When workout is completed
+   ============================================ */
+.checked {
+    text-decoration: line-through; /* Strike through the text */
+    color: #999; /* Gray color */
+    opacity: 0.6; /* Make it semi-transparent */
+}
+
+/* ============================================
+   DELETE BUTTON - Red delete button
+   ============================================ */
+.delete-btn {
+    background: #ff6b6b; /* Red background */
+    color: white; /* White text */
+    padding: 8px 15px; /* Smaller padding than other buttons */
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor */
+    font-size: 0.9rem; /* Smaller text */
+    transition: background 0.3s; /* Smooth color change */
+}
+
+/* Hover effect - Darker red */
+.delete-btn:hover {
+    background: #ff5252; /* Slightly darker red */
+}
+
+/* ============================================
+   EDIT BUTTON - Green edit button (removed but keeping class for future)
+   ============================================ */
+.edit-btn {
+    background: #51cf66; /* Green background */
+    color: white; /* White text */
+    padding: 8px 15px; /* Smaller padding */
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor */
+    font-size: 1rem; /* Text size */
+    transition: background 0.3s; /* Smooth color change */
+    margin-right: 10px; /* Space to the right */
+}
+
+.edit-btn:hover {
+    background: #40c057; /* Darker green on hover */
+}
+
+/* ============================================
+   LEGEND SECTION - Notes at bottom of app
+   ============================================ */
+.legend-section {
+    padding: 30px; /* Space around legend */
+    background: #f8f9fa; /* Light gray background */
+    border-top: 2px solid #e9ecef; /* Top border */
+}
+
+/* Header row with title and Edit button */
+.legend-header {
+    display: flex; /* Side by side layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center vertically */
+    margin-bottom: 15px; /* Space below */
+}
+
+.legend-header h3 {
+    color: #333; /* Dark gray */
+    font-size: 1.3rem; /* Larger text */
+    margin: 0; /* No margin */
+}
+
+/* Edit button */
+.edit-legend-btn {
+    background: #51cf66; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor */
+    font-size: 0.9rem; /* Text size */
+    font-weight: 600; /* Bold text */
+    transition: background 0.3s; /* Smooth color change */
+}
+
+.edit-legend-btn:hover {
+    background: #40c057; /* Darker green */
+}
+
+/* Container for Save and Cancel buttons */
+.legend-buttons {
+    display: flex; /* Side by side */
+    gap: 10px; /* Space between buttons */
+}
+
+/* Save and Cancel buttons */
+.save-btn, .cancel-btn {
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor */
+    font-size: 0.9rem; /* Text size */
+    font-weight: 600; /* Bold text */
+    transition: all 0.3s; /* Smooth transitions */
+}
+
+/* Save button styling */
+.save-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    color: white; /* White text */
+}
+
+.save-btn:hover {
+    transform: translateY(-2px); /* Lift up */
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); /* Shadow */
+}
+
+/* Cancel button styling */
+.cancel-btn {
+    background: #ff6b6b; /* Red background */
+    color: white; /* White text */
+}
+
+.cancel-btn:hover {
+    background: #ff5252; /* Darker red */
+}
+
+/* ============================================
+   LEGEND TEXTAREA - Where user types notes
+   ============================================ */
+.legend-textarea {
+    width: 100%; /* Full width */
+    padding: 15px; /* Space inside */
+    border: 2px solid #e0e0e0; /* Light gray border */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 0.95rem; /* Text size */
+    font-family: inherit; /* Use same font as app */
+    resize: vertical; /* User can drag to make taller/shorter */
+    min-height: 120px; /* Minimum height */
+    transition: border-color 0.3s; /* Smooth color change */
+}
+
+.legend-textarea:focus {
+    outline: none; /* Remove default outline */
+    border-color: #667eea; /* Purple border when typing */
+}
+
+/* ============================================
+   LEGEND DISPLAY - Shows saved notes
+   ============================================ */
+.legend-display {
+    background: white; /* White background */
+    padding: 20px; /* Space inside */
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid #e0e0e0; /* Border */
+    min-height: 100px; /* Minimum height */
+    line-height: 1.6; /* Space between lines */
+    color: #333; /* Text color */
+    white-space: pre-wrap; /* Preserve line breaks */
+}
+
+/* Placeholder text when legend is empty */
+.legend-placeholder {
+    color: #999; /* Gray text */
+    font-style: italic; /* Italic style */
+}
+
+/* ============================================
+   FOOTER - Bottom section with clear button
+   ============================================ */
+footer {
+    padding: 20px 30px; /* Space inside */
+    text-align: center; /* Center content */
+}
+
+/* Clear all button */
+.clear-btn {
+    background: #ff6b6b; /* Red background */
+    margin-bottom: 15px; /* Space below */
+}
+
+.clear-btn:hover {
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4); /* Red shadow */
+}
+
+/* ============================================
+   STATUS TEXT - Success/error messages
+   ============================================ */
+.status-text {
+    color: #666; /* Medium gray */
+    font-size: 0.9rem; /* Smaller text */
+}
+
+/* ============================================
+   SCROLLBAR - Custom styling for webkit browsers (Chrome, Safari)
+   ============================================ */
+#workout-list::-webkit-scrollbar {
+    width: 8px; /* Thin scrollbar */
+}
+
+#workout-list::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Light gray track */
+    border-radius: 10px; /* Rounded */
+}
+
+#workout-list::-webkit-scrollbar-thumb {
+    background: #667eea; /* Purple thumb */
+    border-radius: 10px; /* Rounded */
+}
+
+#workout-list::-webkit-scrollbar-thumb:hover {
+    background: #764ba2; /* Darker purple on hover */
+}
+
+/* ============================================
+   STARTUP MODAL - "Train Hard Leo" popup
+   ============================================ */
+
+/* Overlay - Dark background covering entire screen */
+.startup-modal-overlay {
+    position: fixed; /* Fixed position (stays in place when scrolling) */
+    top: 0; /* Top of screen */
+    left: 0; /* Left of screen */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Appear on top of everything */
+    animation: fadeIn 0.3s ease-in; /* Fade in animation */
+}
+
+/* Modal box - White card in center */
+.startup-modal {
+    background: white; /* White background */
+    padding: 60px 80px; /* Space inside */
+    border-radius: 30px; /* Very rounded corners */
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5); /* Strong shadow */
+    text-align: center; /* Center text */
+    animation: slideUp 0.5s ease-out; /* Slide up animation */
+}
+
+/* Title text in modal */
+.startup-title {
+    font-size: 4rem; /* Very large text */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    -webkit-background-clip: text; /* Clip gradient to text (for Safari) */
+    -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+    background-clip: text; /* Clip gradient to text */
+    margin-bottom: 30px; /* Space below */
+    font-weight: bold; /* Bold text */
+}
+
+/* Button in modal */
+.startup-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    color: white; /* White text */
+    padding: 20px 50px; /* Padding */
+    font-size: 1.5rem; /* Large text */
+    border-radius: 15px; /* Rounded corners */
+    border: none; /* No border */
+    cursor: pointer; /* Hand cursor */
+    font-weight: bold; /* Bold text */
+    transition: transform 0.2s; /* Smooth scale animation */
+}
+
+/* Button grows slightly on hover */
+.startup-button:hover {
+    transform: scale(1.05); /* 5% bigger */
+}
+
+/* ============================================
+   DAY TABS - Monday through Sunday tabs
+   ============================================ */
+.day-tabs {
+    display: flex; /* Side by side layout */
+    padding: 20px 30px; /* Space inside */
+    gap: 10px; /* Space between tabs */
+    background: #f8f9fa; /* Light gray background */
+    border-bottom: 2px solid #e9ecef; /* Bottom border */
+}
+
+/* Individual tab button */
+.day-tab {
+    flex: 1; /* Each tab takes equal space */
+    padding: 12px; /* Space inside */
+    background: white; /* White background */
+    border: 2px solid #e0e0e0; /* Light gray border */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor */
+    transition: all 0.3s; /* Smooth transitions */
+    font-size: 0.9rem; /* Text size */
+    font-weight: 600; /* Bold text */
+    color: #666; /* Gray text */
+}
+
+/* Hover effect - Border turns purple */
+.day-tab:hover {
+    background: #f1f3f5; /* Slightly darker background */
+    border-color: #667eea; /* Purple border */
+}
+
+/* Active tab - Currently selected day */
+.day-tab.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    color: white; /* White text */
+    border-color: #667eea; /* Purple border */
+    transform: translateY(-2px); /* Lift up slightly */
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3); /* Purple shadow */
+}
+
+/* ============================================
+   ANIMATIONS - Keyframes for entrance effects
+   ============================================ */
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        opacity: 1; /* End fully visible */
+    }
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+    from {
+        transform: translateY(50px); /* Start 50px down */
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        transform: translateY(0); /* End at normal position */
+        opacity: 1; /* End fully visible */
+    }
+}
