@@ -466,6 +466,411 @@ footer {
 }
 
 /* ============================================
+   APP CONTAINER - Main layout with sidebar
+   ============================================ */
+.app-container {
+    display: flex; /* Side by side layout */
+    min-height: 100vh; /* Full screen height */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient background */
+}
+
+/* ============================================
+   SIDEBAR - Left navigation panel
+   ============================================ */
+.sidebar {
+    width: 250px; /* Fixed width */
+    background: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Blur effect behind sidebar */
+    border-radius: 0 20px 20px 0; /* Rounded right corners */
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.1); /* Shadow on right side */
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Stack items vertically */
+    padding: 20px 0; /* Space top and bottom */
+}
+
+/* Sidebar header */
+.sidebar-header {
+    padding: 0 20px 30px; /* Space around header */
+    text-align: center; /* Center text */
+    border-bottom: 2px solid #e9ecef; /* Bottom border */
+    margin-bottom: 20px; /* Space below */
+}
+
+.sidebar-header h2 {
+    font-size: 1.5rem; /* Large text */
+    color: #333; /* Dark gray */
+    margin-bottom: 5px; /* Space below */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    -webkit-background-clip: text; /* Clip gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
+    background-clip: text; /* Clip gradient to text */
+}
+
+.sidebar-subtitle {
+    font-size: 0.9rem; /* Smaller text */
+    color: #666; /* Medium gray */
+    margin: 0; /* No margin */
+}
+
+/* Sidebar navigation */
+.sidebar-nav {
+    flex: 1; /* Take up remaining space */
+    padding: 0 10px; /* Space on sides */
+}
+
+.nav-list {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* No padding */
+    margin: 0; /* No margin */
+}
+
+.nav-item {
+    margin-bottom: 10px; /* Space between items */
+}
+
+.nav-button {
+    width: 100%; /* Full width */
+    padding: 15px 20px; /* Space inside */
+    background: transparent; /* No background */
+    border: none; /* No border */
+    border-radius: 12px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor */
+    transition: all 0.3s; /* Smooth transitions */
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center vertically */
+    gap: 12px; /* Space between icon and text */
+    font-size: 1rem; /* Text size */
+    color: #666; /* Gray text */
+    text-align: left; /* Left align text */
+}
+
+.nav-button:hover {
+    background: rgba(102, 126, 234, 0.1); /* Light purple background */
+    color: #667eea; /* Purple text */
+    transform: translateX(5px); /* Move right slightly */
+}
+
+.nav-button.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    color: white; /* White text */
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3); /* Purple shadow */
+}
+
+.nav-icon {
+    font-size: 1.2rem; /* Larger icon */
+}
+
+.nav-label {
+    font-weight: 600; /* Bold text */
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+    padding: 20px; /* Space around footer */
+    border-top: 2px solid #e9ecef; /* Top border */
+    margin-top: auto; /* Push to bottom */
+}
+
+.footer-text {
+    font-size: 0.85rem; /* Smaller text */
+    color: #999; /* Light gray */
+    text-align: center; /* Center text */
+    margin: 0; /* No margin */
+    line-height: 1.4; /* Space between lines */
+}
+
+/* ============================================
+   MAIN CONTENT - Right side content area
+   ============================================ */
+.main-content {
+    flex: 1; /* Take up remaining space */
+    padding: 20px; /* Space around content */
+    overflow-y: auto; /* Scroll if content is too tall */
+}
+
+/* Workout page container */
+.workout-page {
+    max-width: 800px; /* Max width */
+    margin: 0 auto; /* Center horizontally */
+    background: white; /* White background */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    overflow: hidden; /* Hide overflow */
+}
+
+/* ============================================
+   HISTORY PAGE - Workout history with charts
+   ============================================ */
+.history-page {
+    max-width: 1000px; /* Max width */
+    margin: 0 auto; /* Center horizontally */
+    background: white; /* White background */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    overflow: hidden; /* Hide overflow */
+}
+
+/* History page header */
+.history-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    color: white; /* White text */
+    padding: 40px; /* Space inside */
+    text-align: center; /* Center text */
+}
+
+.history-header h1 {
+    font-size: 2.5rem; /* Large text */
+    margin-bottom: 10px; /* Space below */
+}
+
+.history-subtitle {
+    font-size: 1.1rem; /* Text size */
+    opacity: 0.9; /* Slightly transparent */
+}
+
+/* Chart tabs */
+.chart-tabs {
+    display: flex; /* Side by side layout */
+    padding: 20px 30px; /* Space inside */
+    gap: 15px; /* Space between tabs */
+    background: #f8f9fa; /* Light gray background */
+    border-bottom: 2px solid #e9ecef; /* Bottom border */
+}
+
+.chart-tab {
+    flex: 1; /* Equal width tabs */
+    padding: 20px; /* Space inside */
+    background: white; /* White background */
+    border: 2px solid #e0e0e0; /* Light gray border */
+    border-radius: 15px; /* Rounded corners */
+    cursor: pointer; /* Hand cursor */
+    transition: all 0.3s; /* Smooth transitions */
+    text-align: center; /* Center text */
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Stack items vertically */
+    gap: 8px; /* Space between elements */
+}
+
+.chart-tab:hover {
+    background: #f1f3f5; /* Slightly darker background */
+    border-color: #667eea; /* Purple border */
+    transform: translateY(-2px); /* Lift up */
+}
+
+.chart-tab.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+    color: white; /* White text */
+    border-color: #667eea; /* Purple border */
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3); /* Purple shadow */
+}
+
+.tab-icon {
+    font-size: 1.5rem; /* Large icon */
+}
+
+.tab-label {
+    font-size: 1.1rem; /* Text size */
+    font-weight: 600; /* Bold text */
+}
+
+.tab-description {
+    font-size: 0.85rem; /* Smaller text */
+    opacity: 0.8; /* Slightly transparent */
+}
+
+/* Chart container */
+.chart-container {
+    padding: 40px; /* Space around chart */
+    min-height: 500px; /* Minimum height */
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+/* No data message */
+.no-data-message {
+    text-align: center; /* Center text */
+    color: #666; /* Medium gray */
+}
+
+.no-data-message h3 {
+    font-size: 1.5rem; /* Large text */
+    margin-bottom: 15px; /* Space below */
+    color: #333; /* Dark gray */
+}
+
+.no-data-message p {
+    font-size: 1rem; /* Text size */
+    margin-bottom: 10px; /* Space below */
+}
+
+.data-tip {
+    font-size: 0.9rem; /* Smaller text */
+    color: #999; /* Light gray */
+    font-style: italic; /* Italic text */
+}
+
+/* Chart tooltip */
+.chart-tooltip {
+    background: rgba(0, 0, 0, 0.9); /* Dark background */
+    color: white; /* White text */
+    padding: 15px; /* Space inside */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow */
+    font-size: 0.9rem; /* Text size */
+}
+
+.tooltip-label {
+    font-weight: 600; /* Bold text */
+    margin-bottom: 10px; /* Space below */
+    font-size: 1rem; /* Larger text */
+}
+
+.tooltip-item {
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center vertically */
+    gap: 8px; /* Space between color and text */
+    margin-bottom: 5px; /* Space below */
+}
+
+.tooltip-color {
+    width: 12px; /* Width */
+    height: 12px; /* Height */
+    border-radius: 2px; /* Rounded corners */
+}
+
+/* Chart legend */
+.chart-legend {
+    display: flex; /* Side by side layout */
+    justify-content: center; /* Center horizontally */
+    gap: 30px; /* Space between items */
+    padding: 20px; /* Space around */
+    background: #f8f9fa; /* Light gray background */
+    border-top: 2px solid #e9ecef; /* Top border */
+}
+
+.legend-item {
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Center vertically */
+    gap: 8px; /* Space between color and text */
+}
+
+.legend-color {
+    width: 16px; /* Width */
+    height: 16px; /* Height */
+    border-radius: 3px; /* Rounded corners */
+}
+
+.legend-label {
+    font-size: 0.9rem; /* Text size */
+    color: #666; /* Medium gray */
+    font-weight: 500; /* Medium weight */
+}
+
+/* Summary statistics */
+.summary-stats {
+    padding: 30px; /* Space around */
+    background: #f8f9fa; /* Light gray background */
+    border-top: 2px solid #e9ecef; /* Top border */
+}
+
+.summary-stats h3 {
+    text-align: center; /* Center text */
+    font-size: 1.3rem; /* Text size */
+    color: #333; /* Dark gray */
+    margin-bottom: 20px; /* Space below */
+}
+
+.stats-grid {
+    display: grid; /* Grid layout */
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 20px; /* Space between items */
+}
+
+.stat-item {
+    text-align: center; /* Center text */
+    padding: 20px; /* Space inside */
+    background: white; /* White background */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Shadow */
+}
+
+.stat-number {
+    display: block; /* Block element */
+    font-size: 2rem; /* Large text */
+    font-weight: bold; /* Bold text */
+    color: #667eea; /* Purple color */
+    margin-bottom: 5px; /* Space below */
+}
+
+.stat-label {
+    font-size: 0.9rem; /* Text size */
+    color: #666; /* Medium gray */
+    font-weight: 500; /* Medium weight */
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - Mobile and tablet styles
+   ============================================ */
+@media (max-width: 768px) {
+    /* Mobile layout - stack sidebar on top */
+    .app-container {
+        flex-direction: column; /* Stack vertically */
+    }
+    
+    .sidebar {
+        width: 100%; /* Full width */
+        border-radius: 0 0 20px 20px; /* Rounded bottom corners */
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Shadow below */
+    }
+    
+    .sidebar-header {
+        padding: 15px 20px 20px; /* Less padding */
+    }
+    
+    .sidebar-header h2 {
+        font-size: 1.3rem; /* Smaller text */
+    }
+    
+    .nav-button {
+        padding: 12px 15px; /* Less padding */
+        font-size: 0.9rem; /* Smaller text */
+    }
+    
+    .main-content {
+        padding: 15px; /* Less padding */
+    }
+    
+    .history-header {
+        padding: 30px 20px; /* Less padding */
+    }
+    
+    .history-header h1 {
+        font-size: 2rem; /* Smaller text */
+    }
+    
+    .chart-tabs {
+        flex-direction: column; /* Stack tabs vertically */
+        padding: 15px; /* Less padding */
+    }
+    
+    .chart-container {
+        padding: 20px; /* Less padding */
+        min-height: 400px; /* Smaller height */
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 15px; /* Less space */
+    }
+    
+    .chart-legend {
+        flex-direction: column; /* Stack legend items */
+        gap: 15px; /* Less space */
+    }
+}
+
+/* ============================================
    ANIMATIONS - Keyframes for entrance effects
    ============================================ */
 

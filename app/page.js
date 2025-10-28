@@ -16,6 +16,8 @@ import DayTabs from '../components/DayTabs' // Monday-Sunday tabs at the top
 import StartupModal from '../components/StartupModal' // "Train Hard [USER]" popup
 import NameInputModal from '../components/NameInputModal' // First-time name input
 import Legend from '../components/Legend' // Notes section at bottom
+import Sidebar from '../components/Sidebar' // Navigation sidebar
+import WorkoutHistory from '../components/WorkoutHistory' // History page with charts
 import '../app/globals.css' // Load all the styling
 
 // ============================================
@@ -47,6 +49,9 @@ export default function Home() {
   
   // showNameInput: Should we show the name input modal?
   const [showNameInput, setShowNameInput] = useState(false) // Start with false
+
+  // currentPage: Which page is currently active ('main' or 'history')
+  const [currentPage, setCurrentPage] = useState('main') // Start with main workout page
 
   // ============================================
   // STORAGE KEYS - Names for localStorage
@@ -330,51 +335,79 @@ export default function Home() {
     setShowStartup(false)
   }
 
+  // Handle page navigation from sidebar
+  const handlePageChange = (pageId) => {
+    setCurrentPage(pageId)
+  }
+
+  // Get all workout data for history page
+  const getAllWorkoutsData = () => {
+    return getWorkoutsFromStorage()
+  }
+
   // ============================================
   // RENDER - What actually shows on screen
   // ============================================
   return (
-    <main className="container">
-      {/* If showNameInput is true, show the name input modal */}
-      {showNameInput && <NameInputModal onSave={handleSaveName} />}
-      
-      {/* If showStartup is true, show the startup modal with user's name */}
-      {showStartup && <StartupModal onClose={handleCloseStartup} userName={userName} />}
-
-      {/* Header section with title */}
-      <header>
-        <h1>💪 Workout Checklist</h1>
-        <p className="subtitle">Track your daily workouts</p>
-      </header>
-
-      {/* Day tabs (Mon, Tue, Wed, etc.) */}
-      <DayTabs 
-        days={days} // Pass the days array
-        selectedDay={selectedDay} // Pass which day is selected
-        onSelectDay={setSelectedDay} // Pass the function to change selected day
+    <div className="app-container">
+      {/* Sidebar navigation */}
+      <Sidebar 
+        currentPage={currentPage} 
+        onPageChange={handlePageChange} 
       />
 
-      {/* Form to add new workouts */}
-      <WorkoutForm onAdd={addWorkout} />
+      {/* Main content area */}
+      <main className="main-content">
+        {/* If showNameInput is true, show the name input modal */}
+        {showNameInput && <NameInputModal onSave={handleSaveName} />}
+        
+        {/* If showStartup is true, show the startup modal with user's name */}
+        {showStartup && <StartupModal onClose={handleCloseStartup} userName={userName} />}
 
-      {/* List of workouts for the current day */}
-      <WorkoutList 
-        workouts={workouts} // Pass the workouts array
-        onToggle={toggleWorkout} // Pass function to handle checkbox click
-        onDelete={deleteWorkout} // Pass function to handle delete button
-      />
+        {/* Show main workout page or history page based on currentPage */}
+        {currentPage === 'main' ? (
+          /* MAIN WORKOUT PAGE */
+          <div className="workout-page">
+            {/* Header section with title */}
+            <header>
+              <h1>💪 Workout Checklist</h1>
+              <p className="subtitle">Track your daily workouts</p>
+            </header>
 
-      {/* Legend section at bottom (notes for each day) */}
-      <Legend day={selectedDay} />
+            {/* Day tabs (Mon, Tue, Wed, etc.) */}
+            <DayTabs 
+              days={days} // Pass the days array
+              selectedDay={selectedDay} // Pass which day is selected
+              onSelectDay={setSelectedDay} // Pass the function to change selected day
+            />
 
-      {/* Footer with clear button */}
-      <footer>
-        <button className="clear-btn" onClick={clearAllWorkouts}>
-          Clear All Workouts
-        </button>
-        {/* Show status message if there is one */}
-        {status && <p className="status-text">{status}</p>}
-      </footer>
-    </main>
+            {/* Form to add new workouts */}
+            <WorkoutForm onAdd={addWorkout} />
+
+            {/* List of workouts for the current day */}
+            <WorkoutList 
+              workouts={workouts} // Pass the workouts array
+              onToggle={toggleWorkout} // Pass function to handle checkbox click
+              onDelete={deleteWorkout} // Pass function to handle delete button
+            />
+
+            {/* Legend section at bottom (notes for each day) */}
+            <Legend day={selectedDay} />
+
+            {/* Footer with clear button */}
+            <footer>
+              <button className="clear-btn" onClick={clearAllWorkouts}>
+                Clear All Workouts
+              </button>
+              {/* Show status message if there is one */}
+              {status && <p className="status-text">{status}</p>}
+            </footer>
+          </div>
+        ) : (
+          /* HISTORY PAGE */
+          <WorkoutHistory workoutsData={getAllWorkoutsData()} />
+        )}
+      </main>
+    </div>
   )
 }
