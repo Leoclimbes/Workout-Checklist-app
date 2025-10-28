@@ -9,6 +9,7 @@
 export const metadata = {
   title: 'Workout Checklist', // This shows in the browser tab
   description: 'Track your daily workouts with automatic daily reset', // Used by search engines
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', // iPhone optimization
 }
 
 // This is the main layout function
